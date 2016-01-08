@@ -1,0 +1,45 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+	<div class="row">
+	<div class="col-sm-12">
+		<div class="jumbotron">
+		<h1>Knowledge Base</h1>
+		<h2 style='text-transform:uppercase'>Picovico - Convert photos into videos.</h2>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>Categories</h3>
+			</div>
+			<div class="list-group" id='fd-categories'>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$.getJSON("categories.json", function(data){
+				$.each(data, function(index, item){
+					console.log(item);
+					category_dom = $("<div class='list-group-item'></div>");
+					if(item.category.folders){	
+						folders_dom = $("<ul class='list-inline pull-right'></ul>");
+						$.each(item.category.folders, function(index, some_folder){
+							folders_dom.append("<li><a class='btn btn-default' href='#'>" + some_folder.name + "</a></li>");
+						});
+						category_dom.append(folders_dom);
+						// category_dom.append("<div class='clearfix'></div>");
+					}
+					category_dom.append(item.category.name + "<br /><small>" + item.category.description + "</small>");
+					$("#fd-categories").append(category_dom);
+				});
+			});
+		});
+	</script>
+</body>
+</html>
