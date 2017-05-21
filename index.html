@@ -2,7 +2,15 @@
 <head>
 <title>Picovico - KnowledgeBase</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Assistant|Lato" rel="stylesheet">
+
+
 <style type="text/css">
+body,html{
+font-family: 'Assistant', sans-serif;
+
+/*font-family: 'Roboto Slab', serif;*/
+}
 	a{
 		color:#d32f2f;
 		text-decoration: none !important;
@@ -27,7 +35,7 @@
 		font-size: 1.3em;
 	}
 	.article.answer{
-		border-left: 5px solid gray;
+		/*border-left: 5px solid gray;*/
 		margin:1em;
 		padding:1em;
 	}
@@ -43,12 +51,9 @@
 		display: block;
 	}
 	.articles .expanded-parent{
-		background: #edf3ff;
-		/*box-shadow: 2px 2px 2px gray;*/
-
-		 -moz-box-shadow:    inset 0 3px 5px #eeeeee;
-   -webkit-box-shadow: inset 0 3px 5px #eeeeee;
-   box-shadow:         inset 0 3px 5px #eeeeee;
+		background: #f6f9ff;
+		border: 1px solid lightgray !important;
+		border-left: 5px solid lightgray !important;
 	}
 	.expandthis.expanded > a{
 		text-decoration: none;
@@ -64,13 +69,23 @@
 		/*padding:1em;*/
 	}
 	.expanded > .question{
-		font-weight: bold;
+		font-weight: normal;
+		font-size: 1.7em;
+		line-height: 1.7em;
+		border-bottom: 1px solid lightgray;
+		text-align: center;
+		color: #444;
+		padding:0.4em 0.4em 0.8em 0.4em;
+		/*font-family: 'Roboto Slab', serif;*/
+		font-family: 'Lato', sans-serif;
+
+
 	}
-	.expanded > .question::before{
+	/*.expanded > .question::before{
 		font-weight: bold;
 		content: 'Question : ';
 		color: orange;
-	}
+	}*/
 	.folders > .list-group-item{
 		background: #f9f9f9;
 	}
