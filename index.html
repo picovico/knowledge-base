@@ -5,9 +5,11 @@
 <style type="text/css">
 	a{
 		color:#d32f2f;
+		text-decoration: none !important;
 	}
 	#fd-categories .panel{
 		border: none;
+		box-shadow: none;
 	}
 	#fd-categories .panel-body{
 		padding:1em 0;
@@ -18,10 +20,68 @@
 		font-size: 0.8em;
 	}
 	.article{
-		margin: 1em;
-		padding:1em;
+		/*margin: 1em;*/
+		/*padding:1em;*/
 		display: block;
-		border-left:5px solid gray;
+		/*border-left:5px solid #ccc;*/
+		font-size: 1.3em;
+	}
+	.article.answer{
+		border-left: 5px solid gray;
+		margin:1em;
+		padding:1em;
+	}
+	.expandthis.expanded{
+		display: block;
+		/*text-align: center;*/
+		/*padding:1em;*/
+		/*margin:1em;*/
+		/*background: #f9f9f9;*/
+		color:#d32f2f;
+	}
+	a.api{
+		display: block;
+	}
+	.expandthis.expanded > a{
+		text-decoration: none;
+		color:#d32f2f;
+		font-size: 1.7em;
+		font-weight: bold;
+	}
+	.expanded-parent > p.cat-desc{
+		font-size: 1.4em;
+		/*text-align: center;*/
+		display: block;
+		/*background: #f7f7f7;*/
+		/*padding:1em;*/
+	}
+	.expanded > .question{
+		font-weight: bold;
+	}
+	.expanded > .question::before{
+		font-weight: bold;
+		content: 'Question : ';
+		color: orange;
+	}
+	.folders > .list-group-item{
+		background: #f9f9f9;
+	}
+	.jumbotron{
+		background:white;
+		padding:5em 0 !important;
+	}
+	.jumbotron .logo{
+		display: none;
+	}
+	.jumbotron.cya{
+		padding-bottom:1em !important;
+		border-bottom: 1px solid #f7f7f7;
+	}
+	.jumbotron.cya *{
+		font-size: 1em;
+	}
+	.jumbotron.cya .logo{
+		display: block;
 	}
 </style>
 </head>
@@ -29,9 +89,12 @@
 	<div class="container">
 	<div class="row">
 	<div class="col-sm-12">
-		<div class="jumbotron" style="background:white; padding:5em 0;">
+		<div class="jumbotron">
+			<img class='logo pull-right' height=50 src='https://pv-creatives.s3.amazonaws.com/email-campaigns/mowgli/picovico-logo-only-x100.png' />
 		<h1 style="color:#d32f2f">Knowledge Base</h1>
-		<h2 style='text-transform:uppercase'>Picovico - Convert photos into videos.</h2>
+		<h2 style='text-transform:uppercase'>
+			Picovico - Convert photos into videos.
+		</h2>
 		</div>
 		<div id='fd-categories'>
 		</div>
