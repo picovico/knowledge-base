@@ -37,12 +37,12 @@ function handle_category_click(self, data){
     // $(self).parent().parent().append("<hr />");
     var container = $("<div class='list-group folders content' style='display:none'></div>");
     $.each(data, function(index, item){
-        var anchor_dom = $("<a href='javascript:void()' class='folder api'></a>");
+        var anchor_dom = $("<a href='javascript:void()' class='folder api' data-parent=2></a>");
         anchor_dom.attr("data-id", item.id);
         anchor_dom.attr("data-handler", "folder");
         anchor_dom.attr("data-api", "solutions/folders/" + item.id + "/articles")
         anchor_dom.append(item.name);
-        var heading_dom = $("<h5></h5>");
+        var heading_dom = $("<h4></h4>");
         heading_dom.append(anchor_dom);
         var li_dom = $("<div class='list-group-item'></div>");
         li_dom.append(heading_dom);
@@ -56,13 +56,15 @@ function handle_folder_click(self, data){
     var panel = $("<div class='panel content'><div class='panel-body'></div></div>");
     var container = $("<div class='list-group articles' style='display:none'></div>");
     $.each(data, function(index, item){
-        var anchor_dom = $("<a href='javascript:void()' class='article api'></a>");
+        var anchor_dom = $("<a href='javascript:void()' class='article api' data-parent=2></a>");
         anchor_dom.attr("data-id", item.id);
         anchor_dom.attr("data-handler", "article");
         anchor_dom.attr("data-api", "solutions/articles/" + item.id );
         anchor_dom.append(item.title);
+        var h_dom = $("<h5></h5>");
+        h_dom.append(anchor_dom);
         var li_dom = $("<div class='list-group-item'></div>");
-        li_dom.append(anchor_dom);
+        li_dom.append(h_dom);
         container.append(li_dom);        
     }) ;          
     panel.append(container);
@@ -73,7 +75,7 @@ function handle_folder_click(self, data){
 function handle_article_click(self, data){
     var panel = $("<p class='article content'></p>");
     panel.append("<strong> Answer : </strong> <br /> " + data.description);
-    $(self).parent().append(panel);
+    $(self).parent().parent().append(panel);
     // $(self).parent().parent().find(".articles").fadeIn();
 }
 
@@ -82,15 +84,22 @@ $(function(){
         event.preventDefault();
         var self = this;
         var api = $(this).data("api");
+        var handler = $(self).data("handler") ;
         if($(this).data("expanded")){
+            var p_levels = parseInt($(this).data('parent'));
+            var p = $(this);
+            for(var i = 0; i < p_levels; i++){
+                p = p.parent();
+            }
+            p.find("> .content").toggle();
             return;
         }
 
         $(this).data("expanded", true);
 
         $.getJSON("api_cache/" + api + "/response.json", function(data){
-            var handler = "handle_" + $(self).data("handler") + "_click";
-            window[handler](self, data);
+            var handler_fn = "handle_" + handler + "_click";
+            window[handler_fn](self, data);
         });
         return false;
     });
@@ -102,7 +111,7 @@ $(function(){
         $.each(data, function(index, item){
             category_dom = $("<div class='panel-body'></div>");
 
-            var anchor_dom = $("<h4><a class='category api'></a></h4>");
+            var anchor_dom = $("<h3><a class='category api' data-parent=3></a></h3>");
             anchor_dom.find("a").attr("href", "#");
             anchor_dom.find("a").attr("data-handler", "category");
             anchor_dom.find("a").attr("data-category-id", item.id);
