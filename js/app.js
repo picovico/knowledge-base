@@ -85,21 +85,21 @@ function handle_folder_click(self, data, parent_id, parent_permalink){
     var panel = $("<div class='panel content'></div>");
     var container = $("<div class='list-group articles' style='display:none'></div>");
     $.each(data, function(index, item){
-				if(item.status == 2){
-        var anchor_dom = $("<a href='#' class='article question api' data-parent=2></a>");
-        anchor_dom.attr("data-id", item.id);
-        anchor_dom.attr("data-parent-id", parent_id);
-        anchor_dom.attr("data-permalink", parent_permalink + "/" + item.id);
-        anchor_dom.attr("data-handler", "article");
-        anchor_dom.attr("data-api", "solutions/articles/" + item.id );
-        anchor_dom.append(item.title);
-        var h_dom = $("<h5 class='collapsed'></h5>");
-        h_dom.append(anchor_dom);
-        var li_dom = $("<div class='list-group-item'></div>");
-        li_dom.append(h_dom);
-        container.append(li_dom);        
-				}
-		}) ;          
+		if(item.status == 2){
+            var anchor_dom = $("<a href='#' class='article question api' data-parent=2></a>");
+            anchor_dom.attr("data-id", item.id);
+            anchor_dom.attr("data-parent-id", parent_id);
+            anchor_dom.attr("data-permalink", parent_permalink + "/" + item.id);
+            anchor_dom.attr("data-handler", "article");
+            anchor_dom.attr("data-api", "solutions/articles/" + item.id );
+            anchor_dom.append(item.title);
+            var h_dom = $("<h5 class='collapsed'></h5>");
+            h_dom.append(anchor_dom);
+            var li_dom = $("<div class='list-group-item'></div>");
+            li_dom.append(h_dom);
+            container.append(li_dom);
+		}
+	});          
     panel.append(container);
     $(self).parent().parent().append(panel);
     $(self).parent().parent().find(".articles").fadeIn();
@@ -112,8 +112,19 @@ function handle_article_click(self, data, parent_id, parent_permalink){
     permalink.find("a").attr("href", "#!" + parent_permalink);
     panel.append(permalink);
     panel.append(data.description);
-    $(self).parent().parent().append(panel);
     // $(self).parent().parent().find(".articles").fadeIn();
+    
+    if(data.attachments){
+        panel.append("<strong><i class='fa fa-paperclip'></i> Attachments</strong><br />");
+        $.each(data.attachments, function(index, item){
+            var dom = $("<a class='attachment'></a>");
+            dom.attr('href', item.attachment_url);
+            dom.html(item.name + "<small class='pull-right'>" + (item.size / 1024.0) + " KB</small>");
+            panel.append(dom);
+        });
+    }
+
+    $(self).parent().parent().append(panel);
 
     $('html, body').animate({
         scrollTop: $("[data-id=" + data.id + "]").offset().top - 100
