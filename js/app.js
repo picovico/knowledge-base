@@ -85,6 +85,7 @@ function handle_folder_click(self, data, parent_id, parent_permalink){
     var panel = $("<div class='panel content'></div>");
     var container = $("<div class='list-group articles' style='display:none'></div>");
     $.each(data, function(index, item){
+				if(item.status == 2){
         var anchor_dom = $("<a href='#' class='article question api' data-parent=2></a>");
         anchor_dom.attr("data-id", item.id);
         anchor_dom.attr("data-parent-id", parent_id);
@@ -97,7 +98,8 @@ function handle_folder_click(self, data, parent_id, parent_permalink){
         var li_dom = $("<div class='list-group-item'></div>");
         li_dom.append(h_dom);
         container.append(li_dom);        
-    }) ;          
+				}
+		}) ;          
     panel.append(container);
     $(self).parent().parent().append(panel);
     $(self).parent().parent().find(".articles").fadeIn();
