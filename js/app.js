@@ -141,10 +141,13 @@ $(function(){
         var api = $(this).data("api");
         var handler = $(self).data("handler") ;
 
+				var category_name = $(self).text();
+
         var parent_id = $(this).data("id");
         var parent_permalink = $(this).data("permalink");
 
         window.location.hash = "#!" + parent_permalink;
+				document.title = category_name + " - Picovico Knowledge Base";
 
         $(this).parent().toggleClass("expanded");
         $(this).parent().parent().toggleClass("expanded-parent");
