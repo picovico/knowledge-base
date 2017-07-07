@@ -59,6 +59,8 @@ PERMALINK = {
     }
 }
 
+var dateappend=new Date();
+
 function handle_category_click(self, data, parent_id, parent_permalink){
     // $(self).parent().parent().append("<hr />");
     var container = $("<div class='list-group folders content' style='display:none'></div>");
@@ -160,7 +162,7 @@ $(function(){
 
         $(this).data("expanded", true);
 
-        $.getJSON("api_cache/" + api + "/response.json", function(data){
+        $.getJSON("api_cache/" + api + "/response.json?v=" + dateappend, function(data){
             var handler_fn = "handle_" + handler + "_click";
             window[handler_fn](self, data, parent_id, parent_permalink);
         });
@@ -171,7 +173,7 @@ $(function(){
 
 $(function(){
     PERMALINK.init();
-    $.getJSON("api_cache/solutions/categories/response.json", function(data){
+    $.getJSON("api_cache/solutions/categories/response.json?v=" + dateappend, function(data){
         $.each(data, function(index, item){
             category_dom = $("<div class='panel-body'></div>");
 
